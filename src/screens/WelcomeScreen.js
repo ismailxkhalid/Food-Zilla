@@ -1,4 +1,4 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Platform } from "react-native";
 import React, { useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -6,7 +6,14 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import Animated, { useSharedValue, withSpring } from "react-native-reanimated";
+import Animated, {
+  useSharedValue,
+  withSpring,
+  PinwheelIn,
+  PinwheelOut,
+  Easing,
+  BounceIn,
+} from "react-native-reanimated";
 import { useNavigation } from "@react-navigation/native";
 
 export default function WelcomeScreen() {
@@ -43,16 +50,27 @@ export default function WelcomeScreen() {
             className="bg-white/20 rounded-full "
             style={{ padding: ring2padding }}
           >
-            <Image
-              source={require("../../assets/foodLogo.png")}
-              className=" rounded-full object-cover"
-              style={{ width: wp(60), height: hp(28) }}
-            />
+            <Animated.View
+              entering={
+                Platform.OS === "ios"
+                  ? PinwheelIn.easing(Easing.ease)
+                  : undefined
+              }
+            >
+              <Image
+                source={require("../../assets/foodLogo.png")}
+                className=" rounded-full object-cover"
+                style={{ width: wp(60), height: hp(28) }}
+              />
+            </Animated.View>
           </Animated.View>
         </Animated.View>
 
         {/* Welcome Text */}
-        <View className="space-y-2 flex items-center">
+        <Animated.View
+          entering={BounceIn.duration(1000)}
+          className="space-y-2 flex items-center"
+        >
           <Text
             style={{ fontSize: hp(5) }}
             className="text-white font-bold tracking-widest "
@@ -65,7 +83,7 @@ export default function WelcomeScreen() {
           >
             Where Every Recipe Tells a Story
           </Text>
-        </View>
+        </Animated.View>
       </View>
     </SafeAreaView>
   );
