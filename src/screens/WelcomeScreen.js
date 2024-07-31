@@ -27,11 +27,11 @@ export default function WelcomeScreen() {
     ring2padding.value = 0;
     setTimeout(
       () => (ring1padding.value = withSpring(ring1padding.value + wp(10))),
-      200
+      800
     );
     setTimeout(
       () => (ring2padding.value = withSpring(ring2padding.value + wp(8))),
-      300
+      1000
     );
 
     // Navigation to Home Screen after 4 seconds

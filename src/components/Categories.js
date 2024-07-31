@@ -1,13 +1,17 @@
 import { View, Text, ScrollView, TouchableOpacity, Image } from "react-native";
 import React from "react";
-import { categoriesData } from "../constants";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import Animated, { FadeInDown } from "react-native-reanimated";
+import CachedImage from "../utils/CachedImage";
 
-export default function Categories({ activeCategory, setActiveCategory }) {
+export default function Categories({
+  activeCategory,
+  handleChangeCategory,
+  categories,
+}) {
   return (
     <Animated.View
       entering={FadeInDown.duration(1000).springify()}
@@ -19,8 +23,8 @@ export default function Categories({ activeCategory, setActiveCategory }) {
         className="space-x-4"
         contentContainerStyle={{ paddingHorizontal: 15 }}
       >
-        {categoriesData.map((category, index) => {
-          let isActiveCategory = category.name == activeCategory;
+        {categories.map((category, index) => {
+          let isActiveCategory = category.strCategory == activeCategory;
           let activeImageClass = isActiveCategory
             ? " border border-amber-500 border-4"
             : " border border-white border-4 ";
@@ -31,24 +35,32 @@ export default function Categories({ activeCategory, setActiveCategory }) {
           return (
             <TouchableOpacity
               key={index}
-              onPress={() => setActiveCategory(category.name)}
-              className="flex items-center space-y-1"
+              onPress={() => handleChangeCategory(category.strCategory)}
+              className="flex items-center -mx-2 "
             >
-              <View className={`rounded-full p-[2px] ${activeImageClass}`}>
-                <Image
+              <View className={`rounded-full p-[4px] ${activeImageClass}`}>
+                {/* <Image
                   className="rounded-full object-fill object-center"
-                  source={{ uri: category.image }}
+                  source={{ uri: category.strCategoryThumb }}
                   onError={(error) =>
                     console.log("Image Load Error:", error.nativeEvent.error)
                   }
-                  style={{ width: hp(7), height: hp(7) }}
+                  style={{ width: hp(6), height: hp(6) }}
+                /> */}
+                <CachedImage
+                  className="rounded-full object-fill object-center"
+                  uri={category.strCategoryThumb}
+                  onError={(error) =>
+                    console.log("Image Load Error:", error.nativeEvent.error)
+                  }
+                  style={{ width: hp(6), height: hp(6) }}
                 />
               </View>
               <Text
                 style={{ fontSize: hp(1.6) }}
                 className={`text-center ${actveTextClass}`}
               >
-                {category.name}
+                {category.strCategory}
               </Text>
             </TouchableOpacity>
           );

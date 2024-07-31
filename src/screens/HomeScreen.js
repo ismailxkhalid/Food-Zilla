@@ -6,7 +6,7 @@ import {
   TextInput,
   Platform,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
@@ -15,14 +15,57 @@ import {
 } from "react-native-responsive-screen";
 import { BellIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import Categories from "../components/Categories";
-import Animated, {
-  BounceIn,
-  BounceInRight,
-  Easing,
-} from "react-native-reanimated";
+import Animated, { BounceIn } from "react-native-reanimated";
+import axios from "axios";
+import Recipes from "../components/Recipes";
 
 export default function HomeScreen() {
-  const [activeCategory, setActiveCategory] = useState("Starter");
+  const [categories, setCategories] = useState([]);
+  const [recipes, setRecipes] = useState([]);
+
+  useEffect(() => {
+    getCategories();
+    getRecipes();
+  }, []);
+
+  // Handle change active category
+  const handleChangeCategory = (category) => {
+    getRecipes(category);
+    setActiveCategory(category);
+    setRecipes([]);
+  };
+
+  // Fuction to call API for Categories
+  const getCategories = async () => {
+    try {
+      const response = await axios.get(
+        "https://themealdb.com/api/json/v1/1/categories.php"
+      );
+      // console.log("Response:", response.data);
+      if (response.data) {
+        setCategories(response.data.categories);
+      }
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  };
+  // Fuction to call API for Recipes
+  const getRecipes = async (category = "Beef") => {
+    try {
+      const response = await axios.get(
+        `https://themealdb.com/api/json/v1/1/filter.php?c=${category}`
+      );
+      // console.log("Response:", response.data.meals);
+      if (response && response.data) {
+        setRecipes(response.data.meals);
+        console.log("Recipes:", recipes);
+      }
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  };
+
+  const [activeCategory, setActiveCategory] = useState("Beef");
   return (
     <SafeAreaView className="flex-1 bg-white ">
       <View className="flex-1 bg-white mx-4">
@@ -75,7 +118,7 @@ export default function HomeScreen() {
               placeholder="Search any recipe"
               placeholderTextColor={"gray"}
               style={{ fontSize: hp(1.7) }}
-              className="pl-3 py-1 tracking-wider flex-1"
+              className="pl-3 tracking-wider flex-1"
             />
             <View className="bg-white/80 rounded-full p-3">
               <MagnifyingGlassIcon
@@ -87,10 +130,16 @@ export default function HomeScreen() {
           </View>
 
           {/* Categories */}
-          <Categories
-            activeCategory={activeCategory}
-            setActiveCategory={setActiveCategory}
-          />
+          {categories.length > 0 && (
+            <Categories
+              categories={categories}
+              activeCategory={activeCategory}
+              handleChangeCategory={handleChangeCategory}
+            />
+          )}
+
+          {/* Recipes */}
+          <Recipes categories={categories} recipes={recipes} />
         </ScrollView>
       </View>
     </SafeAreaView>
