@@ -9,6 +9,7 @@ import { mealData } from "../constants";
 import Animated, { BounceIn, FadeInDown } from "react-native-reanimated";
 import Loading from "./Loading";
 import CachedImage from "../utils/CachedImage";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Recipes({ categories, recipes }) {
   return (
@@ -38,6 +39,7 @@ export default function Recipes({ categories, recipes }) {
 }
 
 const RecpieCard = ({ item, index }) => {
+  const navigation = useNavigation();
   let isEven = index % 2 == 0;
   return (
     <Animated.View
@@ -48,6 +50,7 @@ const RecpieCard = ({ item, index }) => {
       className="mb-4"
     >
       <Pressable
+        onPress={() => navigation.navigate("RecipeDetails", { ...item })}
         style={{
           width: "100%",
           paddingLeft: isEven ? 0 : 8,

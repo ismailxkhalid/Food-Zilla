@@ -58,7 +58,7 @@ export default function HomeScreen() {
       // console.log("Response:", response.data.meals);
       if (response && response.data) {
         setRecipes(response.data.meals);
-        console.log("Recipes:", recipes);
+        // console.log("Recipes:", recipes);
       }
     } catch (error) {
       console.log("Error:", error);
