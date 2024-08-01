@@ -71,4 +71,4 @@
 ## Video Demonstration
 
 Check out this video to see Food Zilla in action:
-[<img src="./assets/screenshots/Home.png" alt="Welcome Screen" height="400"/>](https://drive.google.com/file/d/1EMvtiTl0HFZFxuDOxjDFjwtVVx-bm4XW/view?usp=drive_link)
+[<img src="./assets/screenshots/Home.png" alt="Welcome Screen" height="400"/>](https://www.linkedin.com/posts/ismailxkhalid_reactnative-expo-mobileappdevelopment-activity-7224868552921522176-5Etm?utm_source=share&utm_medium=member_desktop)
