@@ -35,7 +35,7 @@ export default function WelcomeScreen() {
     );
 
     // Navigation to Home Screen after 4 seconds
-    setTimeout(() => navigation.navigate("Home"), 2000);
+    setTimeout(() => navigation.navigate("Home"), 2100);
   }, []);
   return (
     <SafeAreaView className="flex-1 bg-amber-600">
