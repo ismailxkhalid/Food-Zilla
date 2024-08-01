@@ -65,8 +65,8 @@
 
 ## Screenshots
 
-<img src="./assets/screenshots/Home.png" alt="Home Screen" height="400"/> <img src="./assets/screenshots/Recipe.png" alt="Recipe Details" height="400"/><img src="./assets/screenshots/Recipe2.png" alt="Recipe 2" height="400"/>
-<img src="./assets/screenshots/Recipe3.png" alt="Recipe 3" height="400"/><img src="./assets/screenshots/Welcome.png" alt="Welcome Screen" height="400"/>
+<img src="./assets/screenshots/Welcome.png" alt="Welcome Screen" height="400"/><img src="./assets/screenshots/Home.png" alt="Home Screen" height="400"/> <img src="./assets/screenshots/Recipe.png" alt="Recipe Details" height="400"/><img src="./assets/screenshots/Recipe2.png" alt="Recipe 2" height="400"/>
+<img src="./assets/screenshots/Recipe3.png" alt="Recipe 3" height="400"/>
 
 ## Video Demonstration
 
