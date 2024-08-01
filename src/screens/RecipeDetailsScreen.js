@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
@@ -18,7 +18,11 @@ import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import Loading from "../components/Loading";
 import YoutubeIframe from "react-native-youtube-iframe";
-// import YoutubeIframe from "react-native-youtube-iframe";
+import Animated, {
+  SharedTransition,
+  withSpring,
+  FadeInDown,
+} from "react-native-reanimated";
 
 export default function RecipeDetailsScreen(props) {
   const navigation = useNavigation();
@@ -87,6 +91,16 @@ export default function RecipeDetailsScreen(props) {
     return match ? match[1] : null;
   }
 
+  const customTransition = SharedTransition.custom((values) => {
+    "worklet";
+    return {
+      height: withSpring(values.targetHeight),
+      width: withSpring(values.targetWidth),
+      originX: withSpring(values.targetOriginX),
+      originY: withSpring(values.targetOriginY),
+    };
+  });
+
   return (
     <ScrollView
       className="bg-white flex-1"
@@ -96,9 +110,12 @@ export default function RecipeDetailsScreen(props) {
       <StatusBar style="light" />
 
       {/* Recipe Image */}
-      <View className="flex-row justify-center">
-        <CachedImage
-          uri={item.strMealThumb}
+      <Animated.View
+        entering={FadeInDown.delay(300).duration(3000).springify().damping(20)}
+        className="flex-row justify-center"
+      >
+        <Image
+          source={{ uri: item.strMealThumb }}
           style={{
             width: wp(98),
             height: hp(50),
@@ -107,11 +124,19 @@ export default function RecipeDetailsScreen(props) {
             borderBottomRightRadius: 40,
             marginTop: 4,
           }}
+          sharedTransitionTag={item.strMealThumb}
+          SharedTransitionStyle={customTransition}
           className=" object-cover object-center"
         />
 
         {/* Back and Favorite Button */}
-        <View className="w-full absolute flex-row justify-between px-4 pt-14">
+        <Animated.View
+          entering={FadeInDown.delay(600)
+            .duration(2000)
+            .springify()
+            .damping(20)}
+          className="w-full absolute flex-row justify-between px-4 pt-14"
+        >
           {/* Back Button */}
           <TouchableOpacity
             className="bg-white p-2 rounded-full"
@@ -131,14 +156,20 @@ export default function RecipeDetailsScreen(props) {
               strokeWidth={4.5}
             />
           </TouchableOpacity>
-        </View>
-      </View>
+        </Animated.View>
+      </Animated.View>
 
       {/* Recipe Details */}
       {isLoading ? (
         <Loading size="large" className="mt-48" />
       ) : (
-        <View className=" px-4 flex justify-between space-y-3 pt-8">
+        <Animated.View
+          entering={FadeInDown.delay(700)
+            .duration(2000)
+            .springify()
+            .damping(20)}
+          className=" px-4 flex justify-between space-y-3 pt-8"
+        >
           {/* Name and Area */}
           <View className="space-y-2">
             <Text
@@ -322,7 +353,7 @@ export default function RecipeDetailsScreen(props) {
               </View>
             </View>
           )}
-        </View>
+        </Animated.View>
       )}
     </ScrollView>
   );

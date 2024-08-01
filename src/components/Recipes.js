@@ -6,7 +6,12 @@ import {
 } from "react-native-responsive-screen";
 import MasonryList from "reanimated-masonry-list";
 import { mealData } from "../constants";
-import Animated, { BounceIn, FadeInDown } from "react-native-reanimated";
+import Animated, {
+  BounceIn,
+  FadeInDown,
+  SharedTransition,
+  withSpring,
+} from "react-native-reanimated";
 import Loading from "./Loading";
 import CachedImage from "../utils/CachedImage";
 import { useNavigation } from "@react-navigation/native";
@@ -41,6 +46,15 @@ export default function Recipes({ categories, recipes }) {
 const RecpieCard = ({ item, index }) => {
   const navigation = useNavigation();
   let isEven = index % 2 == 0;
+  const customTransition = SharedTransition.custom((values) => {
+    "worklet";
+    return {
+      height: withSpring(values.targetHeight),
+      width: withSpring(values.targetWidth),
+      originX: withSpring(values.targetOriginX),
+      originY: withSpring(values.targetOriginY),
+    };
+  });
   return (
     <Animated.View
       entering={FadeInDown.delay(index * 300)
@@ -69,6 +83,8 @@ const RecpieCard = ({ item, index }) => {
         /> */}
 
         <CachedImage
+          sharedTransitionTag={item.strMealThumb}
+          SharedTransitionStyle={customTransition}
           uri={item.strMealThumb}
           style={{
             width: "100%",

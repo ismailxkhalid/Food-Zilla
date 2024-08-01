@@ -17,6 +17,7 @@ export default function CachedImage(props) {
         if (cachedImageData) {
           // If cached image data exists, update the state to use this cached data
           setCachedSource({ uri: cachedImageData });
+          console.log("Data was found in AsyncStorage");
         } else {
           // If no cached data, fetch the image from the internet
           const response = await fetch(uri);
@@ -37,6 +38,9 @@ export default function CachedImage(props) {
 
           // Update the state with the new Base64 image data
           setCachedSource({ uri: base64Data });
+          console.log(
+            "Data was not saved so now converted to Base64 and stored"
+          );
         }
       } catch (error) {
         console.log("Error in getCachedImage:", error);
