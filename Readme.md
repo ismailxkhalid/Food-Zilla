@@ -65,13 +65,10 @@
 
 ## Screenshots
 
-<img src="./assets/screenshots/Home.png" alt="Home Screen" height="300"/>
-<img src="./assets/screenshots/Recipe.png" alt="Recipe Details" height="300"/>
-<img src="./assets/screenshots/Recipe2.png" alt="Recipe 2" height="300"/>
-<img src="./assets/screenshots/Recipe3.png" alt="Recipe 3" height="300"/>
-<img src="./assets/screenshots/Welcome.png" alt="Welcome Screen" height="300"/>
+<img src="./assets/screenshots/Home.png" alt="Home Screen" height="400"/> <img src="./assets/screenshots/Recipe.png" alt="Recipe Details" height="400"/><img src="./assets/screenshots/Recipe2.png" alt="Recipe 2" height="400"/>
+<img src="./assets/screenshots/Recipe3.png" alt="Recipe 3" height="400"/><img src="./assets/screenshots/Welcome.png" alt="Welcome Screen" height="400"/>
 
 ## Video Demonstration
 
 Check out this video to see Food Zilla in action:
-[![Food Zilla Demo](./assets/screenshots/Home.png)](https://drive.google.com/file/d/1EMvtiTl0HFZFxuDOxjDFjwtVVx-bm4XW/view?usp=drive_link)
+[<img src="./assets/screenshots/Home.png" alt="Welcome Screen" height="400"/>](https://drive.google.com/file/d/1EMvtiTl0HFZFxuDOxjDFjwtVVx-bm4XW/view?usp=drive_link)
