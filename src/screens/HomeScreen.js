@@ -43,7 +43,11 @@ export default function HomeScreen() {
       );
       // console.log("Response:", response.data);
       if (response.data) {
-        setCategories(response.data.categories);
+        const filteredCategories = response.data.categories.filter(
+          (category) => category.strCategory !== "Pork"
+        );
+
+        setCategories(filteredCategories);
       }
     } catch (error) {
       console.log("Error:", error);
